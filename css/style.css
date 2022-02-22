@@ -1,0 +1,175 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --main-color: #000;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.btn-reset {
+  border: none;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.btn {
+  padding: 8px;
+  border: 1px solid var(--main-color);
+}
+
+.btn_square  {
+  margin-left: 8px;
+  width: 33px;
+  height: 33px;
+}
+
+.input {
+  width: 100%;
+  padding: 7px;
+}
+
+.lable {
+  margin-bottom: 8px;
+}
+
+
+
+.main {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.chat {
+  position: relative;
+  width: 320px;
+  height: 533px;
+  border: 1px solid var(--main-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 8px;
+}
+
+.chat__top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.chat__body {
+  position: relative;
+  height: 100%;
+  overflow: hidden auto;
+  border: 1px solid var(--main-color);
+  margin-bottom: 8px;
+}
+
+.chat__body::-webkit-scrollbar {
+  width: 0;
+}
+
+.chat__body-massager {
+  position: absolute;
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: flex-end;
+  padding: 8px;
+}
+
+.item {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  background: #5fb2ff;
+  word-wrap: break-word;
+  border-radius: 4px;
+}
+
+.item_other {
+  align-self: flex-start;
+}
+
+.item_readed {
+  background: #E5E5E5;
+}
+
+.item:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.item-date {
+  align-self: flex-end;
+  font-style: italic;
+  font-size: 12px;
+}
+
+.chat__form {
+  display: flex;
+}
+
+.blur::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: gray;
+}
+
+.modal {
+  position: absolute;
+  display: none;
+  width: 274px;
+  height: 319px;
+  background-color: #fff;
+  padding: 20px 15px;
+}
+
+.modal__top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal__btn {
+  width: 20px;
+  height: 20px;
+  background: url('../img/close.svg') center no-repeat;
+}
+
+.modal__form {
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+
+}
+.modal__input {
+  margin-bottom: 8px;
+}
+
+.visible {
+  display: block;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <main class="main">
+    <div class="chat">
+      <div class="chat__top">
+        <button class="btn-reset btn setting-btn">Настройки</button>
+        <button class="btn-reset btn exit-btn">Выйти</button>
+      </div>
+      <div class="chat__body">
+        <div class="chat__body-massager">
+        </div>
+      </div>
+      <form action="#" class="chat__form">
+        <input type="text" class="input input-sent" placeholder="сообщение..">
+        <button class="btn-reset btn btn_square send-btn">-></button>
+      </form>
+    </div>
+    <div class="modal">
+      <div class="modal__top">
+        <p class="title">Авторизация</p>
+        <button class="btn-reset modal__btn"></button>
+      </div>
+      <div class="modal__main">
+        <form action="#" class="modal__form">
+          <label  class="lable" for="modal-form">Почта:</label>
+          <input type="text" class="input modal__input" id="modal-form">
+          <button type="submit" class="btn-reset btn">Получить код</button>
+        </form>
+        <form action="#" class="modal__form">
+          <label  class="lable" for="modal-form">Код:</label>
+          <input type="text" class="input modal__input" id="modal-form">
+          <label  class="lable" for="modal-form2">Имя</label>
+          <input type="text" class="input modal__input" id="modal-form2">
+          <button type="submit" class="btn-reset btn">Войти</button>
+        </form>
+      </div>
+    </div>
+
+  </main>
+  <template id="message">
+    <div class="item">
+      <p class="item-text"></p>
+      <span class="item-date"></span>
+    </div>
+  </template>
+  <script src="js/view.js" type="module"></script>
+  <script src="js/api.js" type="module"></script>
+  <script src="js/main.js" type="module"></script>
+</body>
+
+</html>

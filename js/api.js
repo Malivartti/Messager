@@ -6,7 +6,7 @@ export const API = {
   USER: `https://${MAIN_DOMEN}api/user`,
   ME: `https://${MAIN_DOMEN}api/user/me`,
   MESSAGES: `https://${MAIN_DOMEN}api/messages`,
-  WEBSOCKETS: `ws://${MAIN_DOMEN}websockets`,
+  WEBSOCKETS: `wss://${MAIN_DOMEN}websockets`,
 };
 
 export async function getRequest(url, method, args) {

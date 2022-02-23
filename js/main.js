@@ -24,10 +24,10 @@ UI.CHAT_FORM.addEventListener('submit', function() {
 UI.AUTHORIZATION_FORM.addEventListener('submit', function() {
   const email = this.children[1].value;
   if (!email.trim()) return;
+  switchModal('confirmation');
   getRequest(API.USER, 'POST', {body: {email}});
   API.EMAIL = email;
   localStorage.setItem('email', email);
-  switchModal('confirmation');
   this.reset();
 });
 
@@ -90,5 +90,9 @@ function addHistory() {
     el.classList.add('item_message');
     el.textContent = 'Новые сообщения';
     UI.CHAT.append(el);
-  });
+  })
+  .then(function() {
+    UI.CHAT_BODY.scrollTop = UI.CHAT_BODY.scrollHeight;
+  })
+  
 };

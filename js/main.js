@@ -85,7 +85,7 @@ function sendMessage(text) {
 
 function addHistory() {
   getRequest(API.MESSAGES, 'GET', {token: localStorage.getItem('token')})
-  .then(i => i.messages.forEach(i => addMessageToChat(i.user.name, i.text, false, i.createdAt)))
+  .then(i => i.messages.forEach(i => addMessageToChat(i.user.name, i.text, i.user.email == API.EMAIL, i.createdAt)))
   .then(function() {
     const el = document.createElement('div');
     el.classList.add('item_message');

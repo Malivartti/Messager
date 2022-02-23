@@ -14,11 +14,11 @@ if (localStorage.getItem('token')) {
 }
 
 
-
 UI.CHAT_FORM.addEventListener('submit', function() {
   if (!this.firstElementChild.value.trim()) return;
   sendMessage(this.firstElementChild.value);
   this.reset();
+  return false
 });
 
 UI.AUTHORIZATION_FORM.addEventListener('submit', function() {
@@ -29,6 +29,7 @@ UI.AUTHORIZATION_FORM.addEventListener('submit', function() {
   API.EMAIL = email;
   localStorage.setItem('email', email);
   this.reset();
+  return false
 });
 
 UI.CONFIRMATION_FORM.addEventListener('submit', function() {
@@ -94,5 +95,4 @@ function addHistory() {
   .then(function() {
     UI.CHAT_BODY.scrollTop = UI.CHAT_BODY.scrollHeight;
   })
-  
 };

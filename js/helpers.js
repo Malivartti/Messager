@@ -1,5 +1,5 @@
-export function getTime() {
-  const date = new Date()
+export function getTime(time) {
+  const date = time ? new Date(time) : new Date()
   let hours = date.getHours()
   let minutes = date.getMinutes()
   minutes = (minutes < 10) ? '0' + minutes : minutes

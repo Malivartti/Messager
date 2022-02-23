@@ -1,8 +1,10 @@
 const MAIN_DOMEN = 'chat1-341409.oa.r.appspot.com/'
 
 export const API = {
-  TOKEN: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbGl2YXJ0dGlAeWFuZGV4LnJ1IiwiaWF0IjoxNjQ1NTMzNjI4LCJleHAiOjE2NDU5ODAwMjh9.IBhHlYGsA2OWs6GsrtIqT6GKdrsWjCUHfKAMGaYSVQk',
+  TOKEN: undefined,
+  EMAIL: undefined,
   USER: `https://${MAIN_DOMEN}api/user`,
+  ME: `https://${MAIN_DOMEN}api/user/me`,
   MESSAGES: `https://${MAIN_DOMEN}api/messages`,
   WEBSOCKETS: `ws://${MAIN_DOMEN}websockets`,
 }
@@ -17,9 +19,9 @@ export async function getRequest(url, method, args) {
   const fetchValue = {
     method,
     headers,
-    ...(args.method != 'GET' && {body: JSON.stringify(args.body)})
+    ...(method != 'GET' && {body: JSON.stringify(args.body)})
   }
-  
+  console.log(fetchValue)
   try {
     const response = await fetch(url, fetchValue);
     if (response.ok) {

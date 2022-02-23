@@ -92,7 +92,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: end;
-  align-items: flex-end;
+  align-items: flex-start;
   padding: 8px;
 }
 
@@ -101,17 +101,14 @@ body {
   display: flex;
   flex-direction: column;
   padding: 8px;
-  background: #5fb2ff;
   word-wrap: break-word;
   border-radius: 4px;
-}
-
-.item_other {
-  align-self: flex-start;
-}
-
-.item_readed {
   background: #E5E5E5;
+}
+
+.item_me {
+  align-self: flex-end;
+  background: #5fb2ff;
 }
 
 .item:not(:last-child) {
@@ -140,7 +137,6 @@ body {
 
 .modal {
   position: absolute;
-  display: none;
   width: 274px;
   height: 319px;
   background-color: #fff;
@@ -170,6 +166,6 @@ body {
   margin-bottom: 8px;
 }
 
-.visible {
-  display: block;
+.hidden {
+  display: none;
 }

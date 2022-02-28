@@ -5,7 +5,7 @@ export const UI = {
   AUTHORIZATION_FORM: document.querySelector('.authorization-form'),
   CONFIRMATION_FORM: document.querySelector('.confirmation-form'),
   SEARCH_FORM: document.querySelector('.search-form'),
-  MESSAGE: document.querySelector('#message'),
+  MESSAGE: document.querySelector('#message'), // TEmplait
   SETTING: document.querySelector('.setting-btn'),
   CLOSE: document.querySelector('.modal__btn'),
   TITLE: document.querySelector('.title'),

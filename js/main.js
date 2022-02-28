@@ -3,13 +3,13 @@ import {API, getRequest} from './api.js';
 import {getTime} from './helpers.js';
 
 let socket;
+let history;
 if (localStorage.getItem('token')) {
-  API.TOKEN = localStorage.getItem('token');
-  API.EMAIL = localStorage.getItem('email');
   startСonnection();
   switchModal('settings');
   document.querySelector('.chat').classList.remove('blur');
   document.querySelector('.modal').classList.add('hidden');
+  history = await getRequest(API.MESSAGES, 'GET', {token: localStorage.getItem('token')});
   addHistory()
 }
 
@@ -22,26 +22,26 @@ UI.CHAT_FORM.addEventListener('submit', function() {
 });
 
 UI.AUTHORIZATION_FORM.addEventListener('submit', function() {
-  const email = this.children[1].value;
-  if (!email.trim()) return;
+  const email = this.children[1].value.trim();
+  if (!email) return;
   switchModal('confirmation');
   getRequest(API.USER, 'POST', {body: {email}});
-  API.EMAIL = email;
   localStorage.setItem('email', email);
   this.reset();
   return false
 });
 
-UI.CONFIRMATION_FORM.addEventListener('submit', function() {
+UI.CONFIRMATION_FORM.addEventListener('submit', async function() {
   const token = this.children[1].value;
   const name = this.children[3].value;
   getRequest(API.USER, 'PATCH', {body: {name}, token})
   .then(function() {
-    API.TOKEN = token;
     localStorage.setItem('token', token);
     addHistory()
     startСonnection();
   });
+  history = await getRequest(API.MESSAGES, 'GET', {token: localStorage.getItem('token')});
+  localStorage.setItem('scrollIndex', history.messages.length - 100)
   switchModal('settings');
   this.reset();
 });
@@ -60,13 +60,23 @@ UI.SEARCH_FORM.addEventListener('submit', function() {
   this.reset()
 })
 
+UI.CHAT_BODY.addEventListener('scroll', function() {
+  if (UI.CHAT_BODY.scrollTop + UI.CHAT_BODY.clientHeight == UI.CHAT_BODY.scrollHeight && Number(localStorage.getItem('scrollIndex')) + 20 < history.messages.length) {
+    localStorage.setItem('scrollIndex', Number(localStorage.getItem('scrollIndex')) + 20)
+    addHistory()
+  }
+  if (UI.CHAT_BODY.scrollTop === 0)  {
+    console.log(1)
+  }
+})
+
 function startСonnection() {
-  socket = new WebSocket(`${API.WEBSOCKETS}?${API.TOKEN}`);
+  socket = new WebSocket(`${API.WEBSOCKETS}?${localStorage.getItem('token')}`);
 
   socket.onmessage = function(event) {
     const main = JSON.parse(event.data);
     console.log(main);
-    addMessageToChat(main.user.name, main.text, main.user.email == API.EMAIL);
+    addMessageToChat(main.user.name, main.text, main.user.email == localStorage.getItem('email'));
     UI.CHAT_BODY.scrollTop = UI.CHAT_BODY.scrollHeight;
   };
 };
@@ -84,15 +94,20 @@ function sendMessage(text) {
 };
 
 function addHistory() {
-  getRequest(API.MESSAGES, 'GET', {token: localStorage.getItem('token')})
-  .then(i => i.messages.forEach(i => addMessageToChat(i.user.name, i.text, i.user.email == API.EMAIL, i.createdAt)))
-  .then(function() {
-    const el = document.createElement('div');
-    el.classList.add('item_message');
-    el.textContent = 'Новые сообщения';
-    UI.CHAT.append(el);
-  })
-  .then(function() {
-    UI.CHAT_BODY.scrollTop = UI.CHAT_BODY.scrollHeight;
-  })
+  const index = Number(localStorage.getItem('scrollIndex'))
+  history.messages.slice(index).forEach(i => addMessageToChat(i.user.name, i.text, i.user.email == localStorage.getItem('email'), i.createdAt))
 };
+
+// function addHistory() {
+//   getRequest(API.MESSAGES, 'GET', {token: localStorage.getItem('token')})
+//   .then(i => i.messages.forEach(i => addMessageToChat(i.user.name, i.text, i.user.email == API.EMAIL, i.createdAt)))
+//   .then(function() {
+//     const el = document.createElement('div');
+//     el.classList.add('item_message');
+//     el.textContent = 'Новые сообщения';
+//     UI.CHAT.append(el);
+//   })
+//   .then(function() {
+//     UI.CHAT_BODY.scrollTop = UI.CHAT_BODY.scrollHeight;
+//   })
+// };

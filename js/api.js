@@ -1,8 +1,6 @@
 const MAIN_DOMEN = 'chat1-341409.oa.r.appspot.com/'
 
 export const API = {
-  TOKEN: undefined,
-  EMAIL: undefined,
   USER: `https://${MAIN_DOMEN}api/user`,
   ME: `https://${MAIN_DOMEN}api/user/me`,
   MESSAGES: `https://${MAIN_DOMEN}api/messages`,
